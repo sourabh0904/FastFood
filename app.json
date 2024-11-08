@@ -1,0 +1,11 @@
+{
+  "name": "FastFood",
+  "slug": "FastFood",
+  "android": {
+    "package": "com.anonymous.FastFood"
+  },
+  "ios": {
+    "bundleIdentifier": "com.anonymous.FastFood"
+  },
+  "scheme": "FastFood"
+}
