@@ -4,13 +4,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WelcomePage from "./screens/WelcomeScreen";
 import LoginSignupPage from "./screens/LoginSignupPage";
 import SignupScreen from "./screens/SignupPage";
+import HomeScreen from "./screens/HomePage"; // Import Home screen
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false); // Track logged-in status
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName={isLoggedIn ? "Home" : "Welcome"}>
         <Stack.Screen
           name="Welcome"
           component={WelcomePage}
@@ -24,6 +27,11 @@ export default function App() {
         <Stack.Screen
           name="Signup"
           component={SignupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
