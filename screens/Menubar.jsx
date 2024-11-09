@@ -34,19 +34,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     paddingVertical: 10,
-    backgroundColor: "#ff7f50", // Use the Fast Food theme accent color
+    backgroundColor: "#ff7f50",
     borderTopWidth: 1,
-    borderTopColor: "#ff7f50", // Keep consistency with the theme
+    borderTopColor: "#ff7f50",
     position: "absolute",
     bottom: 0,
     width: "100%",
-    borderTopLeftRadius: 25, // Rounded top left corner
-    borderTopRightRadius: 25, // Rounded top right corner
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.1,
     shadowRadius: 10,
-    elevation: 10, // Adds depth to the menu
+    elevation: 10,
   },
   menuItem: {
     alignItems: "center",
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 14,
-    color: "#fff", // Text color changed to white to contrast with the background
+    color: "#fff",
     marginTop: 4,
-    fontWeight: "bold", // Make text bold for prominence
+    fontWeight: "bold",
   },
 });

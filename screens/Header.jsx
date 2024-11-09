@@ -15,19 +15,17 @@ export default function Header() {
   const [userEmail, setUserEmail] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
-  // Random location feature
   const locations = ["Home", "City Center", "Park Avenue", "Downtown"];
   const randomLocation =
     locations[Math.floor(Math.random() * locations.length)];
 
-  // Fetch user info from AsyncStorage
   useEffect(() => {
     const fetchUserInfo = async () => {
       const user = await AsyncStorage.getItem("@user");
       if (user) {
         const parsedUser = JSON.parse(user);
-        setUserName(parsedUser.name); // Assuming user object has a `name` field
-        setUserEmail(parsedUser.email); // Assuming user object has an `email` field
+        setUserName(parsedUser.name);
+        setUserEmail(parsedUser.email);
       }
     };
     fetchUserInfo();
@@ -81,9 +79,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 15,
-    backgroundColor: "#f8f8f8", // Light gray background
+    backgroundColor: "#f8f8f8",
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd", // Subtle border for separation
+    borderBottomColor: "#ddd",
   },
   userName: {
     fontSize: 22,
@@ -96,12 +94,12 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontSize: 16,
-    color: "#ff7f50", // Use the accent orange color for location
+    color: "#ff7f50",
     marginLeft: 5,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Dark overlay for modal
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -115,13 +113,13 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
-    elevation: 10, // Enhanced shadow for a more prominent effect
+    elevation: 10,
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 12,
-    color: "#ff7f50", // Match theme accent color for the title
+    color: "#ff7f50",
   },
   modalItem: {
     fontSize: 16,
@@ -129,7 +127,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   closeButton: {
-    backgroundColor: "#ff7f50", // Use theme color for buttons
+    backgroundColor: "#ff7f50",
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 5,

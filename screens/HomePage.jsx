@@ -19,7 +19,6 @@ export default function HomePage() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const contentOffset = useRef(new Animated.Value(0)).current;
 
-  // Toggle the dropdown and animate the content margin
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
     Animated.timing(contentOffset, {
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomColor: "#ddd",
     borderBottomWidth: 1,
-    zIndex: 1, // Ensure it stays above other content
+    zIndex: 1,
   },
   dropdownText: {
     fontSize: 16,
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: "hidden",
     marginRight: 15,
-    marginLeft: 15, // Removed left margin from images
+    marginLeft: 15,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

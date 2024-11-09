@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient"; // Import LinearGradient
+import { LinearGradient } from "expo-linear-gradient"; 
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -55,7 +55,7 @@ export default function SignupPage() {
       const user = await res.json();
       await AsyncStorage.setItem("@user", JSON.stringify(user));
       setUserInfo(user);
-      navigation.navigate("Home"); // Redirect to Home Page after successful login
+      navigation.navigate("Home"); 
     } catch (error) {
       console.error("Error fetching user info:", error);
       alert("Failed to fetch user information. Please try again.");
@@ -88,9 +88,9 @@ export default function SignupPage() {
       return;
     }
 
-    // You can add additional login/signup logic here for email/password authentication
+    
     Alert.alert("Success", "Logging you in...");
-    navigation.navigate("Home"); // Redirect to Home Page after successful login
+    navigation.navigate("Home"); 
   };
 
   React.useEffect(() => {
@@ -101,7 +101,7 @@ export default function SignupPage() {
 
   return (
     <LinearGradient
-      colors={["#ffeb3b", "#ff7f50"]} // Yellow to Orange gradient
+      colors={["#ffeb3b", "#ff7f50"]} 
       style={styles.container}
     >
       <Text style={styles.header}>SignUp</Text>
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   button: {
     width: "100%",
     paddingVertical: 15,
-    backgroundColor: "#000", // Changed to dark black
+    backgroundColor: "#000", 
     borderRadius: 30,
     marginBottom: 15,
     alignItems: "center",
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   },
   signupLinkText: {
     fontSize: 14,
-    color: "red", // Signup text in red
+    color: "red", 
     fontWeight: "600",
   },
 });

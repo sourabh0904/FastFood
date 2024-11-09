@@ -12,14 +12,13 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
 
-// Helper function to generate random delivery time (between 20 to 60 minutes)
 const getRandomDeliveryTime = () => {
   return `${Math.floor(Math.random() * (60 - 20 + 1)) + 20} min`;
 };
 
 export default function BestSellers({ bestSellers }) {
   const [likedItems, setLikedItems] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null); // For selected product modal
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     loadLikedItems();
@@ -139,15 +138,15 @@ export default function BestSellers({ bestSellers }) {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 20,
-    backgroundColor: "#fff", // Light background for cleanliness
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#ff7f50", // Vibrant orange to match fast food theme
+    color: "#ff7f50",
     marginLeft: 15,
     marginBottom: 10,
-    letterSpacing: 1, // Adds space between letters for emphasis
+    letterSpacing: 1,
   },
   itemContainer: {
     width: 180,
@@ -162,7 +161,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     position: "relative",
     paddingBottom: 15,
-    transition: "transform 0.3s ease", // Hover effect on items
+    transition: "transform 0.3s ease",
   },
   itemImage: {
     width: "100%",
@@ -206,7 +205,7 @@ const styles = StyleSheet.create({
   },
   closeButtonText: {
     fontSize: 18,
-    color: "#ff7f50", // Vibrant orange to match the theme
+    color: "#ff7f50",
     fontWeight: "bold",
   },
   largeImage: {
@@ -238,13 +237,12 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   showAllText: {
-    color: "#ff7f50", // Matching color for consistency
+    color: "#ff7f50",
     fontSize: 16,
     fontWeight: "bold",
   },
 
-  // Hover effect
   itemContainerHovered: {
-    transform: "scale(1.05)", // Slight scale up effect on hover
+    transform: "scale(1.05)",
   },
 });

@@ -41,7 +41,7 @@ export default function Categories({ categories }) {
           <View key={category.id} style={styles.categoryContainer}>
             <TouchableOpacity
               onPress={() => openProductPopup(category)}
-              activeOpacity={0.7} // Simulates hover effect
+              activeOpacity={0.7}
             >
               <Image source={category.image} style={styles.categoryImage} />
               <Text style={styles.categoryText}>{category.name}</Text>
@@ -105,41 +105,41 @@ export default function Categories({ categories }) {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 20,
-    backgroundColor: "#fff", // Light background for cleanliness
+    backgroundColor: "#fff",
   },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#ff7f50", // Vibrant orange to match fast food theme
+    color: "#ff7f50",
     marginBottom: 15,
     paddingHorizontal: 15,
-    letterSpacing: 1, // Adds space between letters for emphasis
+    letterSpacing: 1,
   },
   scrollContainer: {
-    paddingBottom: 10, // Reduced extra bottom gap
+    paddingBottom: 10,
   },
   categoryContainer: {
     alignItems: "center",
     marginHorizontal: 12,
   },
   categoryImage: {
-    width: 120, // Increased width
-    height: 120, // Increased height
-    borderRadius: 10, // More rounded corners for a modern look
+    width: 120,
+    height: 120,
+    borderRadius: 10,
     marginBottom: 8,
-    borderWidth: 2, // Added border to make it pop
-    borderColor: "#ff7f50", // Border color to match the theme
+    borderWidth: 2,
+    borderColor: "#ff7f50",
   },
   categoryText: {
     fontSize: 18,
     color: "#333",
-    fontWeight: "600", // Slightly bolder text for readability
-    textAlign: "center", // Center the text under the image
+    fontWeight: "600",
+    textAlign: "center",
     marginTop: 8,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.6)", // Darker overlay for better contrast
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -154,11 +154,11 @@ const styles = StyleSheet.create({
   closeButton: {
     alignSelf: "flex-end",
     padding: 10,
-    marginTop: -10, // Close button closer to the top for easier access
+    marginTop: -10,
   },
   closeButtonText: {
     fontSize: 20,
-    color: "#ff7f50", // Button text color matches the theme
+    color: "#ff7f50",
     fontWeight: "bold",
   },
   largeImage: {
@@ -171,13 +171,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#333",
     marginBottom: 10,
-    textAlign: "center", // Center the text in the modal
+    textAlign: "center",
   },
   favoriteButton: {
-    backgroundColor: "#ff7f50", // Vibrant orange background
+    backgroundColor: "#ff7f50",
     paddingVertical: 12,
     paddingHorizontal: 25,
-    borderRadius: 30, // Large, round button
+    borderRadius: 30,
     marginTop: 20,
     width: "80%",
     alignItems: "center",
