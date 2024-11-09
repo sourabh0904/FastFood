@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Button,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 
 export default function Header() {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   // Random location feature
   const locations = ["Home", "City Center", "Park Avenue", "Downtown"];
@@ -26,14 +33,10 @@ export default function Header() {
     fetchUserInfo();
   }, []);
 
-  const toggleDrawer = () => {
-    setDrawerVisible(!drawerVisible);
-  };
-
   return (
     <View style={styles.headerContainer}>
       {/* Profile Icon */}
-      <TouchableOpacity onPress={toggleDrawer}>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
         <FontAwesome name="user-circle" size={28} color="#333" />
       </TouchableOpacity>
 
@@ -46,24 +49,26 @@ export default function Header() {
         <Text style={styles.locationText}>{randomLocation}</Text>
       </View>
 
-      {/* Side Drawer */}
-      <Modal visible={drawerVisible} transparent animationType="slide">
-        <TouchableOpacity
-          style={styles.drawerOverlay}
-          onPress={() => setDrawerVisible(false)}
-        >
-          <View style={styles.drawerContainer}>
-            <Text style={styles.drawerTitle}>Profile Details</Text>
-            <Text style={styles.drawerItem}>Name: {userName}</Text>
-            <Text style={styles.drawerItem}>Email: {userEmail}</Text>
+      {/* Profile Details Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Profile Details</Text>
+            <Text style={styles.modalItem}>Name: {userName}</Text>
+            <Text style={styles.modalItem}>Email: {userEmail}</Text>
             <TouchableOpacity
               style={styles.closeButton}
-              onPress={() => setDrawerVisible(false)}
+              onPress={() => setModalVisible(false)}
             >
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
     </View>
   );
@@ -74,14 +79,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    backgroundColor: "#f8f8f8",
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    backgroundColor: "#f8f8f8", // Light gray background
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: "#ddd", // Subtle border for separation
   },
   userName: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "600",
     color: "#333",
   },
@@ -91,42 +96,48 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontSize: 16,
-    color: "#333",
+    color: "#ff7f50", // Use the accent orange color for location
     marginLeft: 5,
   },
-  drawerOverlay: {
+  modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.3)",
-    justifyContent: "flex-end",
-    alignItems: "flex-end",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Dark overlay for modal
+    justifyContent: "center",
+    alignItems: "center",
   },
-  drawerContainer: {
-    width: 250,
+  modalContent: {
+    width: "85%",
     backgroundColor: "#fff",
-    borderRadius: 8,
-    padding: 15,
-    alignItems: "flex-start",
+    borderRadius: 12,
+    padding: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 10, // Enhanced shadow for a more prominent effect
   },
-  drawerTitle: {
+  modalTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 12,
+    color: "#ff7f50", // Match theme accent color for the title
   },
-  drawerItem: {
+  modalItem: {
     fontSize: 16,
-    marginBottom: 8,
+    marginBottom: 10,
     color: "#333",
   },
   closeButton: {
-    marginTop: 15,
+    backgroundColor: "#ff7f50", // Use theme color for buttons
     paddingVertical: 10,
     paddingHorizontal: 15,
-    backgroundColor: "#ff7f50",
     borderRadius: 5,
+    marginTop: 15,
   },
   closeButtonText: {
-    fontSize: 16,
     color: "#fff",
+    fontSize: 16,
     fontWeight: "bold",
   },
 });

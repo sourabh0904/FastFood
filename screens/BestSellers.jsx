@@ -6,6 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Modal,
+  Pressable,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FontAwesome } from "@expo/vector-icons";
@@ -17,6 +19,7 @@ const getRandomDeliveryTime = () => {
 
 export default function BestSellers({ bestSellers }) {
   const [likedItems, setLikedItems] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null); // For selected product modal
 
   useEffect(() => {
     loadLikedItems();
@@ -38,6 +41,27 @@ export default function BestSellers({ bestSellers }) {
     await AsyncStorage.setItem("favorites", JSON.stringify(updatedItems));
   };
 
+  const openProductPopup = (product) => {
+    setSelectedProduct(product);
+  };
+
+  const closeProductPopup = () => {
+    setSelectedProduct(null);
+  };
+
+  const handleAddToFavorites = async () => {
+    if (selectedProduct) {
+      const isLiked = likedItems.find(
+        (liked) => liked.id === selectedProduct.id
+      );
+      if (!isLiked) {
+        const updatedItems = [...likedItems, selectedProduct];
+        setLikedItems(updatedItems);
+        await AsyncStorage.setItem("favorites", JSON.stringify(updatedItems));
+      }
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Best Sellers</Text>
@@ -46,7 +70,9 @@ export default function BestSellers({ bestSellers }) {
           const isLiked = likedItems.some((liked) => liked.id === item.id);
           return (
             <View key={item.id} style={styles.itemContainer}>
-              <Image source={item.image} style={styles.itemImage} />
+              <TouchableOpacity onPress={() => openProductPopup(item)}>
+                <Image source={item.image} style={styles.itemImage} />
+              </TouchableOpacity>
               <TouchableOpacity
                 style={styles.likeButton}
                 onPress={() => handleLike(item)}
@@ -58,26 +84,54 @@ export default function BestSellers({ bestSellers }) {
                 />
               </TouchableOpacity>
               <Text style={styles.itemText}>{item.name}</Text>
-
-              {/* New product details */}
-              <View style={styles.itemDetails}>
-                <Text style={styles.deliveryText}>
-                  Delivery Time: {getRandomDeliveryTime()}
-                </Text>
-                <Text style={styles.ratingText}>Rating: ⭐⭐⭐⭐</Text>
-                <Text style={styles.descriptionText}>
-                  {item.description
-                    ? item.description
-                    : "Delicious and freshly made food for you!"}
-                </Text>
-              </View>
             </View>
           );
         })}
-        <TouchableOpacity style={styles.showAllButton}>
-          <Text style={styles.showAllText}>Show All</Text>
-        </TouchableOpacity>
       </ScrollView>
+
+      {/* Modal for selected product details */}
+      <Modal
+        visible={!!selectedProduct}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={closeProductPopup}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Pressable onPress={closeProductPopup} style={styles.closeButton}>
+              <Text style={styles.closeButtonText}>X</Text>
+            </Pressable>
+            {selectedProduct && (
+              <>
+                <Image
+                  source={selectedProduct.image}
+                  style={styles.largeImage}
+                />
+                <Text style={styles.detailText}>
+                  Name: {selectedProduct.name}
+                </Text>
+                <Text style={styles.detailText}>
+                  Delivery Time: {getRandomDeliveryTime()}
+                </Text>
+                <Text style={styles.detailText}>Rating: ⭐⭐⭐⭐</Text>
+                <Text style={styles.detailText}>
+                  Description:{" "}
+                  {selectedProduct.description ||
+                    "Delicious and freshly made food for you!"}
+                </Text>
+                <TouchableOpacity
+                  style={styles.addToFavoritesButton}
+                  onPress={handleAddToFavorites}
+                >
+                  <Text style={styles.addToFavoritesText}>
+                    Add to Favorites
+                  </Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -85,13 +139,15 @@ export default function BestSellers({ bestSellers }) {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 20,
+    backgroundColor: "#fff", // Light background for cleanliness
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#333",
+    color: "#ff7f50", // Vibrant orange to match fast food theme
     marginLeft: 15,
     marginBottom: 10,
+    letterSpacing: 1, // Adds space between letters for emphasis
   },
   itemContainer: {
     width: 180,
@@ -106,6 +162,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     position: "relative",
     paddingBottom: 15,
+    transition: "transform 0.3s ease", // Hover effect on items
   },
   itemImage: {
     width: "100%",
@@ -129,24 +186,51 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     paddingHorizontal: 5,
   },
-  itemDetails: {
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    width: "85%",
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    elevation: 5,
+  },
+  closeButton: {
+    alignSelf: "flex-end",
+    padding: 10,
+  },
+  closeButtonText: {
+    fontSize: 18,
+    color: "#ff7f50", // Vibrant orange to match the theme
+    fontWeight: "bold",
+  },
+  largeImage: {
+    width: "100%",
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 15,
+  },
+  detailText: {
+    fontSize: 16,
+    color: "#333",
+    marginBottom: 8,
+  },
+  addToFavoritesButton: {
+    backgroundColor: "#ff7f50",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
     marginTop: 10,
-    paddingHorizontal: 5,
   },
-  deliveryText: {
-    fontSize: 12,
-    color: "#555",
-    marginBottom: 5,
-  },
-  ratingText: {
-    fontSize: 12,
-    color: "#555",
-    marginBottom: 5,
-  },
-  descriptionText: {
-    fontSize: 12,
-    color: "#777",
-    marginBottom: 10,
+  addToFavoritesText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   showAllButton: {
     justifyContent: "center",
@@ -154,8 +238,13 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   showAllText: {
-    color: "#ff7f50",
+    color: "#ff7f50", // Matching color for consistency
     fontSize: 16,
     fontWeight: "bold",
+  },
+
+  // Hover effect
+  itemContainerHovered: {
+    transform: "scale(1.05)", // Slight scale up effect on hover
   },
 });
