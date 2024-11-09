@@ -1,25 +1,93 @@
+// HomePage.js
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import Header from "./Header";
+import Categories from "./Categories";
+import BestSellers from "./BestSellers";
+import Menubar from "./Menubar";
 
 export default function HomePage() {
   const navigation = useNavigation();
 
+  const dummyCategories = [
+    {
+      id: 1,
+      name: "Burgers",
+      image: require("../assets/FastFoodApp-IMAGE/image-8.svg"),
+    },
+    {
+      id: 2,
+      name: "Pizzas",
+      image: require("../assets/FastFoodApp-IMAGE/image-9.svg"),
+    },
+    {
+      id: 3,
+      name: "Sushi",
+      image: require("../assets/FastFoodApp-IMAGE/image-10.svg"),
+    },
+    {
+      id: 4,
+      name: "Drinks",
+      image: require("../assets/FastFoodApp-IMAGE/image-11.svg"),
+    },
+  ];
+
+  const dummyBestSellers = [
+    {
+      id: 1,
+      name: "Cheeseburger",
+      image: require("../assets/FastFoodApp-IMAGE/image-1.svg"),
+    },
+    {
+      id: 2,
+      name: "Pepperoni Pizza",
+      image: require("../assets/FastFoodApp-IMAGE/image-2.svg"),
+    },
+    {
+      id: 3,
+      name: "California Roll",
+      image: require("../assets/FastFoodApp-IMAGE/image-3.svg"),
+    },
+    {
+      id: 4,
+      name: "Margarita",
+      image: require("../assets/FastFoodApp-IMAGE/image-4.svg"),
+    },
+  ];
+
   const handleLogout = async () => {
-    // Clear user data from AsyncStorage
     await AsyncStorage.removeItem("@user");
-    navigation.navigate("Login"); // Navigate to login page after logout
+    navigation.navigate("Login");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome to HomePage!</Text>
-
-      {/* Logout Button */}
-      <TouchableOpacity style={styles.button} onPress={handleLogout}>
-        <Text style={styles.buttonText}>Logout</Text>
-      </TouchableOpacity>
+      <Header />
+      <ScrollView style={styles.scrollContainer}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.imageScroll}
+        >
+          <Image
+            source={require("../assets/FastFoodApp-IMAGE/image-5.svg")}
+            style={styles.carouselImage}
+          />
+          <Image
+            source={require("../assets/FastFoodApp-IMAGE/image-6.svg")}
+            style={styles.carouselImage}
+          />
+          <Image
+            source={require("../assets/FastFoodApp-IMAGE/image-7.svg")}
+            style={styles.carouselImage}
+          />
+        </ScrollView>
+        <Categories categories={dummyCategories} />
+        <BestSellers bestSellers={dummyBestSellers} />
+      </ScrollView>
+      <Menubar />
     </View>
   );
 }
@@ -27,26 +95,19 @@ export default function HomePage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
+    backgroundColor: "#f8f8f8",
   },
-  header: {
-    fontSize: 30,
-    fontWeight: "900",
-    color: "#000",
-    marginBottom: 30,
+  scrollContainer: {
+    flex: 1,
+    marginBottom: 60,
   },
-  button: {
-    paddingVertical: 15,
-    backgroundColor: "#ff7f50",
+  imageScroll: {
+    marginVertical: 20,
+  },
+  carouselImage: {
+    width: 300,
+    height: 200,
     borderRadius: 8,
-    marginBottom: 15,
-    alignItems: "center",
-  },
-  buttonText: {
-    fontSize: 16,
-    color: "#fff",
-    fontWeight: "bold",
+    marginRight: 10,
   },
 });
