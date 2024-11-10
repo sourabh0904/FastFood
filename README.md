@@ -46,3 +46,7 @@ FastFood is a mobile application built with React Native and Expo, aimed at prov
 ## 🎬 Demo
 
 ![Screen Recording](assets/screen-recording.mov)
+
+📝 Additional Notes
+-> This project utilizes react-native-reanimated for enhanced animations and smooth transitions.
+-> Make sure to set up the environment for Expo on your device by following the Expo setup guide.
