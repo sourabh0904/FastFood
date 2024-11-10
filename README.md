@@ -20,6 +20,26 @@
 - [`react-native-reanimated` docs](https://docs.swmansion.com/react-native-reanimated/)
 # FastFood
 
+### Screenshots
+
+**Homepage**
+![Homepage](assets/screensnap/HomePage.png)
+
+**Login Page**
+![Login Page](assets/screensnap/LoginPage.png)
+
+**Product Detail Page**
+![Product Detail Page](assets/screensnap/ProductDetail.png)
+
+**Welcomepage**
+![Welcome Page](assets/screensnap/WelcomePage.png)
+
+**Contactinfo**
+![Contact Info](assets/screensnap/ContactInfo.png)
+
+**SignUpPage**
+![SignUp Page](assets/screensnap/SignUpPage.png)
+
 ## Demo
 
 ![Screen Recording](assets/screen-recording.mov)
