@@ -19,3 +19,7 @@
 
 - [`react-native-reanimated` docs](https://docs.swmansion.com/react-native-reanimated/)
 # FastFood
+
+## Demo
+
+![Screen Recording](assets/Screen Recording 2024-11-10 at 1.32.35 AM.mov)
