@@ -1,14 +1,17 @@
-# Reanimated example
+# 🍔 FastFood - React Native Expo App
 
 <p>
   <!-- iOS -->
   <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
   <!-- Android -->
   <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  <!-- Web -->
 </p>
 
-## 🚀 How to use
+## 📱 About FastFood
+
+FastFood is a mobile application built with React Native and Expo, aimed at providing a seamless user experience for food ordering. This app features a welcoming UI, easy navigation, and quick access to various food categories and detailed product pages. 
+
+## 🚀 Getting Started
 
 > `npx create-expo my-app --example with-reanimated`
 
@@ -20,7 +23,7 @@
 - [`react-native-reanimated` docs](https://docs.swmansion.com/react-native-reanimated/)
 # FastFood
 
-### Screenshots
+### 📸 Screenshots
 
 **Homepage**
 ![Homepage](assets/screensnap/HomePage.png)
@@ -40,6 +43,6 @@
 **SignUpPage**
 ![SignUp Page](assets/screensnap/SignUpPage.png)
 
-## Demo
+## 🎬 Demo
 
 ![Screen Recording](assets/screen-recording.mov)
